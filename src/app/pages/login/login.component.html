@@ -1,0 +1,20 @@
+<div class="content">
+  <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+    <div class="form-group">
+      <label for="email">Email</label> <br />
+      <input type="text" name="email" formControlName="email" />
+    </div>
+    <div class="form-group">
+      <label for="Password">Password</label> <br />
+      <input type="password" name="password" formControlName="password" />
+      <br />
+      <small>
+        <a href="forgetPassword">Esqueceu Password?</a>
+      </small>
+    </div>
+    <div class="buttons">
+      <button [disabled]="!loginForm.valid" type="submit">Login</button>
+      <button type="button" routerLink="/cadastrar">Cadastrar</button>
+    </div>
+  </form>
+</div>
