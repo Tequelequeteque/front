@@ -41,4 +41,22 @@ export class ApiService {
       )
       .toPromise();
   }
+
+  public register({ name, email, password, passwordConfirmation, phone, cpf }) {
+    return this._api
+      .post(
+        `${environment.apiURL}/users`,
+        {
+          name,
+          email,
+          password,
+          passwordConfirmation,
+          phone,
+          cpf,
+          redirect: "http://localhost:4200/confirmEmail"
+        },
+        { headers: this.getHeaderTypeJson() }
+      )
+      .toPromise();
+  }
 }

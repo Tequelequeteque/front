@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { ApiService } from "src/app/Services/api.service";
 
 @Component({
   selector: "app-cadastrar",
@@ -23,10 +24,29 @@ export class CadastrarComponent implements OnInit {
     passwordConfirmation: new FormControl({ value: null, disabled: false }, [
       Validators.required,
       Validators.minLength(6)
+    ]),
+    phone: new FormControl({ value: null, disabled: false }, [
+      Validators.required,
+      Validators.minLength(12),
+      Validators.maxLength(15)
+    ]),
+    cpf: new FormControl({ value: null, disabled: false }, [
+      Validators.required,
+      Validators.minLength(11),
+      Validators.maxLength(11)
     ])
   });
 
-  constructor() {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() {}
+
+  async handleRegister() {
+    const data = this.registerForm.getRawValue();
+    try {
+      await this.api.register(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
